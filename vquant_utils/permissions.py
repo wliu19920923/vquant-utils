@@ -1,7 +1,7 @@
 from bson import ObjectId
 from jwt import ExpiredSignatureError, InvalidTokenError
 from tornado.web import HTTPError
-from exceptions import PermissionDenied, InvalidToken
+from .exceptions import PermissionDenied, InvalidToken
 
 
 def allow(method):

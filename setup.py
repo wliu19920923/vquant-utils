@@ -6,7 +6,7 @@ REQUIRES = ['aiohttp', 'motor', 'requests', 'tornado', 'pycryptodome', 'pyjwt']
 
 setup(
     name='vquant_utils',
-    version='1.11.28',
+    version='1.12.6',
     description='vquant_utils',
     platforms='Independant',
     zip_safe=False,

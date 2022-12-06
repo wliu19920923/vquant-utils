@@ -22,6 +22,24 @@ class BooleanField(object):
         return value
 
 
+class DatetimeField(object):
+    def __init__(self, default: int = None, required: bool = True):
+        self.default = default
+        self.required = required
+
+    def validate(self, field, value):
+        if not self.required and value is None:
+            return value or self.default
+        if value is None:
+            raise HTTPError(400, 'Field %s required' % field)
+        if not value.isdigit():
+            raise HTTPError(400, 'Field %s must be a valid integer' % field)
+        value = int(value)
+        if value < 0:
+            raise HTTPError(400, 'Field %s cannot be negative' % field)
+        return datetime.fromtimestamp(value)
+
+
 class CharField(object):
     def __init__(self, default: str = None, required: bool = True, min_length: int = 0, max_length: int = 0, choices: tuple = tuple()):
         self.default = default

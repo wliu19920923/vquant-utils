@@ -11,6 +11,9 @@ class MongoModel(object):
     async def find(self, **kwargs):
         return await self._table.find_one(kwargs)
 
+    async def every(self, order_by='created', desc=DESCENDING, **kwargs):
+        return await self._table.find(kwargs).sort(order_by, desc)
+
     async def query(self, page=1, limit=20, order_by='created', desc=DESCENDING, **kwargs):
         skip_value = (page - 1) * limit
         skip_value = skip_value if skip_value > 0 else 0

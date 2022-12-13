@@ -11,6 +11,8 @@ def allow(method):
             data = await method(self, *args, **kwargs)
         except HTTPError as exp:
             code, message = exp.status_code, exp.log_message
+        except Exception as exp:
+            code, message = 500, str(exp)
         self.set_status(code)
         self.write(dict(data=data, message=message))
         await self.finish()
@@ -31,6 +33,8 @@ def authenticated(method):
             code, message = InvalidToken.status_code, InvalidToken.log_message
         except HTTPError as exp:
             code, message = exp.status_code, exp.log_message
+        except Exception as exp:
+            code, message = 500, str(exp)
         self.set_status(code)
         self.write(dict(data=data, message=message))
         await self.finish()
@@ -53,6 +57,8 @@ def superuser(method):
             code, message = InvalidToken.status_code, InvalidToken.log_message
         except HTTPError as exp:
             code, message = exp.status_code, exp.log_message
+        except Exception as exp:
+            code, message = 500, str(exp)
         self.set_status(code)
         self.write(dict(data=data, message=message))
         await self.finish()
@@ -75,6 +81,8 @@ def staff(method):
             code, message = InvalidToken.status_code, InvalidToken.log_message
         except HTTPError as exp:
             code, message = exp.status_code, exp.log_message
+        except Exception as exp:
+            code, message = 500, str(exp)
         self.set_status(code)
         self.write(dict(data=data, message=message))
         await self.finish()

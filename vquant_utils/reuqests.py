@@ -9,7 +9,7 @@ class RequestMethod:
 class Requests:
     @staticmethod
     def requests(method, url, **kwargs):
-        response = requests.request(method, url, ** kwargs)
+        response = requests.request(method, url, **kwargs)
         try:
             res = response.json()
         except Exception:

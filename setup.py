@@ -6,7 +6,7 @@ REQUIRES = ['aiohttp', 'aiosmtplib', 'motor', 'requests', 'tornado', 'pycryptodo
 
 setup(
     name='vquant_utils',
-    version='1.12.16',
+    version='1.12.17',
     description='vquant_utils',
     platforms='Independant',
     zip_safe=False,

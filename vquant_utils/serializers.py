@@ -111,7 +111,7 @@ class IntegerField(object):
             return value or self.default
         if value is None:
             raise HTTPError(400, 'Field %s required' % field)
-        if not value.isdigit():
+        if not value.strip('-').isdigit():
             raise HTTPError(400, 'Field %s must be a valid integer' % field)
         value = int(value)
         if self.min_value and value < self.min_value:

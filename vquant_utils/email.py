@@ -4,7 +4,7 @@ from email.mime.text import MIMEText
 
 
 class Email(object):
-    def __init(self, host, port, username, password):
+    def __init__(self, host, port, username, password):
         self.host = host
         self.port = port
         self.username = username

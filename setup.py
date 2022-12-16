@@ -2,7 +2,7 @@
 
 from setuptools import setup
 
-REQUIRES = ['aiohttp', 'motor', 'requests', 'tornado', 'pycryptodome', 'pyjwt']
+REQUIRES = ['aiohttp', 'aiosmtplib', 'motor', 'requests', 'tornado', 'pycryptodome', 'pyjwt']
 
 setup(
     name='vquant_utils',

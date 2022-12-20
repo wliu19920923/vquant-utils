@@ -1,5 +1,5 @@
+import math
 from datetime import datetime
-from pymongo import DESCENDING
 
 
 class MongoModel(object):
@@ -11,14 +11,20 @@ class MongoModel(object):
     async def find(self, **kwargs):
         return await self._table.find_one(kwargs)
 
-    async def every(self, order_by='created', desc=DESCENDING, **kwargs):
+    async def every(self, order_by='created', desc=-1, **kwargs):
         return await self._table.find(kwargs).sort(order_by, desc)
 
-    async def query(self, page=1, limit=20, order_by='created', desc=DESCENDING, **kwargs):
+    async def query(self, page=1, limit=20, order_by='created', desc=-1, **kwargs):
+        count = await self._table.count_documents(kwargs)
+        pages = math.ceil(count / limit)
+        page = pages if page > pages else page
         skip_value = (page - 1) * limit
         skip_value = skip_value if skip_value > 0 else 0
         cursor = self._table.find(kwargs).sort(order_by, desc).skip(skip_value).limit(limit)
-        return await cursor.to_list(limit)
+        return dict(
+            pages=pages, count=count,
+            results=await cursor.to_list(limit)
+        )
 
     async def create(self, **kwargs):
         kwargs.update(dict(

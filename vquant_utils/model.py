@@ -23,7 +23,7 @@ class MongoModel(object):
         cursor = self._table.find(kwargs).sort(order_by, desc).skip(skip_value).limit(limit)
         return dict(
             pages=pages, count=count,
-            results=await cursor.to_list(limit)
+            documents=await cursor.to_list(limit)
         )
 
     async def create(self, **kwargs):
